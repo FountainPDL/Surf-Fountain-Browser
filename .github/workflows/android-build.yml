@@ -13,11 +13,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Fix Line Endings
+    - name: Fix Permissions and Line Endings
       run: |
-        sudo apt-get update && sudo apt-get install -y dos2unix
-        find . -name 'gradlew' -exec dos2unix {} \;
+        sudo apt-get update
+        sudo apt-get install -y dos2unix
         chmod +x gradlew
+        find . -name 'gradlew' -exec dos2unix {} \;
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
