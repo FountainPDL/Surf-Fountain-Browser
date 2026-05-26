@@ -1,3 +1,37 @@
 plugins {
-    id 'com.android.application' version '8.1.0' apply false
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android' version '1.9.0' // even for Java, but we'll use Java
+}
+
+android {
+    namespace 'com.surffountain.browser'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.surffountain.browser"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.webkit:webkit:1.11.0'
 }
