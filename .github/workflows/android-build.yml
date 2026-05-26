@@ -20,13 +20,10 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Setup Gradle
+    - name: Setup Gradle Wrapper
       uses: gradle/actions/setup-gradle@v4
 
-    - name: Make gradlew executable
-      run: chmod +x gradlew
-
-    - name: Build with Gradle
+    - name: Build APK
       run: ./gradlew assembleDebug --stacktrace --no-daemon
 
     - name: Upload APK
