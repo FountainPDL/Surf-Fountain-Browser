@@ -1,12 +1,11 @@
 # Surf Fountain Browser
 
-Privacy-first Android web browser with purple theme.
+A privacy-focused Android web browser inspired by Brave, built purely in Java.
 
 ## Features
-- Full WebView with all Brave-inspired features
-- Video download & iframe extraction
+- Full Chromium-based browsing
+- Advanced privacy shields
 - PDL AI assistant
-- Ad blocking
-- Purple dominant color
+- Custom purple/green/red theme
 
-Built with pure Java.
+Built for Android with GitHub Actions for APK builds.
