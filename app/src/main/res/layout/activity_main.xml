@@ -2,50 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#121212">
+    android:orientation="vertical">
 
-    <!-- Top Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="#6A1B9A"
         android:padding="8dp">
 
-        <ImageButton
-            android:id="@+id/back_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_media_previous"
-            android:background="?android:attr/selectableItemBackground"
-            android:tint="#FFFFFF" />
-
         <EditText
-            android:id="@+id/url_bar"
+            android:id="@+id/urlBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Search or enter URL"
-            android:background="#FFFFFF"
-            android:textColor="#000000"
-            android:padding="8dp"
-            android:layout_marginHorizontal="8dp" />
+            android:imeOptions="actionGo" />
 
-        <ImageButton
-            android:id="@+id/go_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_menu_send"
-            android:background="?android:attr/selectableItemBackground"
-            android:tint="#FFFFFF" />
-
+        <Button
+            android:id="@+id/aiButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PDL AI"
+            android:backgroundTint="#4CAF50" />
     </LinearLayout>
 
-    <!-- WebView -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp" />
+
     <WebView
-        android:id="@+id/webview"
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </LinearLayout>
