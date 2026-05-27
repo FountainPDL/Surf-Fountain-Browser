@@ -1,4 +1,4 @@
-#/usr/bin/env sh
+# !/usr/bin/env sh
 
 APP_HOME=$(dirname "$0")
 APP_HOME=$(cd "$APP_HOME" && pwd -P)
