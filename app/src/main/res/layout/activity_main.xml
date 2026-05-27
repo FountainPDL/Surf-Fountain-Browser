@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search or enter URL"
-        android:background="@color/purple_700"
+        android:background="#6200EE"
         android:textColor="#FFFFFF"
-        android:padding="12dp" />
+        android:padding="12dp"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
@@ -28,29 +28,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_700"
+        android:background="#6200EE"
         android:orientation="horizontal"
-        android:padding="8dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:padding="8dp">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="Shields"
-            android:onClick="toggleShields"
-            android:backgroundTint="@color/green" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="PDL AI"
-            android:onClick="openPDLAI"
-            android:backgroundTint="@color/purple_500" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="Downloads"
-            android:backgroundTint="@color/red" />
+        <Button android:text="Shields" android:onClick="toggleShields" android:backgroundTint="#00C853"/>
+        <Button android:text="PDL AI" android:onClick="openPDLAI" android:backgroundTint="#6200EE"/>
+        <Button android:text="Downloads" android:backgroundTint="#F50057"/>
     </LinearLayout>
 </LinearLayout>

@@ -12,7 +12,6 @@ import android.webkit.*;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         settings.setDisplayZoomControls(false);
 
         webView.setWebViewClient(new CustomWebViewClient());
-        webView.setWebChromeClient(new CustomWebChromeClient());
+        webView.setWebChromeClient(new WebChromeClient());
 
         webView.loadUrl("https://www.google.com");
 
@@ -64,19 +63,18 @@ public class MainActivity extends AppCompatActivity {
         webView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, 
-                "SurfFountain_" + System.currentTimeMillis());
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "SurfFountain_" + System.currentTimeMillis());
             ((DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE)).enqueue(request);
-            Toast.makeText(this, "Downloading...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Downloading video...", Toast.LENGTH_SHORT).show();
         });
     }
 
     public void openPDLAI(View view) {
-        Toast.makeText(this, "PDL AI opened - Ask anything about this page", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "PDL AI Activated", Toast.LENGTH_LONG).show();
     }
 
     public void toggleShields(View view) {
-        webView.evaluateJavascript("alert('Surf Fountain Shields Activated - Trackers & Ads Blocked');", null);
+        webView.evaluateJavascript("alert('Surf Fountain Shields: Ads & Trackers Blocked');", null);
         Toast.makeText(this, "Shields ON", Toast.LENGTH_SHORT).show();
     }
 
@@ -96,15 +94,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class CustomWebChromeClient extends WebChromeClient {
-    }
-
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
-        } else {
-            super.onBackPressed();
-        }
+        if (webView.canGoBack()) webView.goBack();
+        else super.onBackPressed();
     }
 }
