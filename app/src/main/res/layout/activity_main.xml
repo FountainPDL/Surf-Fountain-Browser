@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Top Address Bar (Brave Style) -->
+    <!-- Top Address Bar (Brave style) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Search or type URL"
+            android:hint="Search or enter URL"
             android:textColor="#FFFFFF"
             android:textColorHint="#B0FFFFFF"
             android:background="@android:color/transparent"
@@ -36,7 +36,7 @@
             android:layout_height="match_parent"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- Bottom Navigation (Brave Style) -->
+    <!-- Bottom Navigation - Brave Style -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,9 +45,9 @@
         android:gravity="center"
         android:padding="8dp">
 
-        <Button android:text="Shields" android:onClick="toggleShields" android:backgroundTint="#00C853" android:layout_weight="1"/>
-        <Button android:text="PDL AI" android:onClick="openPDLAI" android:backgroundTint="#8E24AA" android:layout_weight="1"/>
+        <Button android:text="🛡️ Shields" android:onClick="toggleShields" android:backgroundTint="#00C853" android:layout_weight="1"/>
+        <Button android:text="🤖 PDL AI" android:onClick="openPDLAI" android:backgroundTint="#8E24AA" android:layout_weight="1"/>
         <Button android:text="Tabs" android:backgroundTint="#F50057" android:layout_weight="1"/>
-        <Button android:text="Menu" android:backgroundTint="#00C853" android:layout_weight="1"/>
+        <Button android:text="⋮ Menu" android:backgroundTint="#00C853" android:layout_weight="1"/>
     </LinearLayout>
 </LinearLayout>

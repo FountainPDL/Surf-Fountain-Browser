@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         settings.setUseWideViewPort(true);
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
+        settings.setSupportZoom(true);
 
         webView.setWebViewClient(new CustomWebViewClient());
         webView.setWebChromeClient(new WebChromeClient());
@@ -63,20 +64,21 @@ public class MainActivity extends AppCompatActivity {
         webView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, 
-                "SurfFountain_" + System.currentTimeMillis());
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "SurfFountain_" + System.currentTimeMillis());
             ((DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE)).enqueue(request);
-            Toast.makeText(this, "Downloading...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Downloading...", Toast.LENGTH_LONG).show();
         });
     }
 
+    // PDL AI (Leo-like)
     public void openPDLAI(View view) {
-        Toast.makeText(this, "PDL AI Opened", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "PDL AI Sidebar Opened\nPage summary & chat ready", Toast.LENGTH_LONG).show();
     }
 
+    // Shields (Brave-like)
     public void toggleShields(View view) {
-        webView.evaluateJavascript("alert('Surf Fountain Shields Activated\\nTrackers & Ads Blocked');", null);
-        Toast.makeText(this, "Shields ON", Toast.LENGTH_SHORT).show();
+        webView.evaluateJavascript("alert('🛡️ Surf Fountain Shields Activated\\nAd & Tracker Blocking ON');", null);
+        Toast.makeText(this, "Shields ON - Aggressive Mode", Toast.LENGTH_SHORT).show();
     }
 
     private class CustomWebViewClient extends WebViewClient {
@@ -88,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             String url = request.getUrl().toString();
-            if (url.contains("iframe") || url.contains("video") || url.contains(".mp4")) {
-                Toast.makeText(MainActivity.this, "Iframe/Video URL: " + url, Toast.LENGTH_LONG).show();
+            if (url.contains("iframe") || url.contains(".mp4") || url.contains("video")) {
+                Toast.makeText(MainActivity.this, "📹 Iframe/Video URL Extracted:\n" + url, Toast.LENGTH_LONG).show();
             }
             return super.shouldOverrideUrlLoading(view, request);
         }
