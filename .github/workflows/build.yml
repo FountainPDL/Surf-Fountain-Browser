@@ -1,93 +1,93 @@
 name: Android Build
 
 on:
-  push:
-    branches:
-      - main
-      - master
-  workflow_dispatch:
+push:
+branches:
+- main
+- master
+workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+build:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+steps:
+  - name: Checkout code
+    uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-          cache: gradle
+  - name: Set up JDK 17
+    uses: actions/setup-java@v4
+    with:
+      distribution: temurin
+      java-version: '17'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+  - name: Set up Gradle
+    uses: gradle/actions/setup-gradle@v4
 
-      - name: Write local.properties
-        run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+  - name: Set up Android SDK
+    uses: android-actions/setup-android@v3
 
-      - name: Generate Purple Launcher Icons
-        run: |
-          python3 - << 'PYEOF'
-          import os
-          import struct
-          import zlib
+  - name: Write local.properties
+    run: |
+      echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
 
-          def make_png(size, r, g, b):
-              def chunk(name, data):
-                  c = zlib.crc32(name + data) & 0xffffffff
-                  return struct.pack('>I', len(data)) + name + data + struct.pack('>I', c)
-              ihdr = struct.pack('>IIBBBBB', size, size, 8, 2, 0, 0, 0)
-              raw = b''
-              for y in range(size):
-                  raw += b'\x00'
-                  for x in range(size):
-                      cx, cy = size // 2, size // 2
-                      radius = size // 2 - 2
-                      dist = ((x - cx) ** 2 + (y - cy) ** 2) ** 0.5
-                      if dist <= radius:
-                          raw += bytes([r, g, b])
-                      else:
-                          raw += bytes([0, 0, 0])
-              compressed = zlib.compress(raw)
-              png = (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', ihdr) + chunk(b'IDAT', compressed) + chunk(b'IEND', b''))
-              return png
+  - name: Generate Purple Icons
+    run: |
+      python3 - << 'PYEOF'
+      import os, struct, zlib
 
-          sizes = {
-              'mipmap-mdpi': 48, 'mipmap-hdpi': 72, 'mipmap-xhdpi': 96,
-              'mipmap-xxhdpi': 144, 'mipmap-xxxhdpi': 192,
-          }
+      def make_png(size, r, g, b):
+          def chunk(name, data):
+              c = zlib.crc32(name + data) & 0xffffffff
+              return struct.pack('>I', len(data)) + name + data + struct.pack('>I', c)
 
-          pr, pg, pb = 0x7C, 0x3A, 0xED  # Purple color
+          ihdr = struct.pack('>IIBBBBB', size, size, 8, 2, 0, 0, 0)
 
-          for folder, size in sizes.items():
-              path = f'app/src/main/res/{folder}'
-              os.makedirs(path, exist_ok=True)
-              with open(f'{path}/ic_launcher.png', 'wb') as f:
-                  f.write(make_png(size, pr, pg, pb))
-              with open(f'{path}/ic_launcher_round.png', 'wb') as f:
-                  f.write(make_png(size, pr, pg, pb))
+          raw = b''
+          for y in range(size):
+              raw += b'\x00'
+              for x in range(size):
+                  raw += bytes([r, g, b])
 
-          print('Purple icons generated successfully')
-          PYEOF
+          compressed = zlib.compress(raw)
 
-      - name: Download Gradle Wrapper
-        run: |
-          mkdir -p gradle/wrapper
-          curl -fsSL https://github.com/gradle/gradle/raw/v8.10.2/gradle/wrapper/gradle-wrapper.jar \
-            -o gradle/wrapper/gradle-wrapper.jar
+          return (
+              b'\x89PNG\r\n\x1a\n'
+              + chunk(b'IHDR', ihdr)
+              + chunk(b'IDAT', compressed)
+              + chunk(b'IEND', b'')
+          )
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
+      sizes = {
+          'mipmap-mdpi': 48,
+          'mipmap-hdpi': 72,
+          'mipmap-xhdpi': 96,
+          'mipmap-xxhdpi': 144,
+          'mipmap-xxxhdpi': 192
+      }
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace --no-daemon
+      for folder, size in sizes.items():
+          path = f'app/src/main/res/{folder}'
+          os.makedirs(path, exist_ok=True)
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Surf-Fountain-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
-          if-no-files-found: error
+          with open(f'{path}/ic_launcher.png', 'wb') as f:
+              f.write(make_png(size, 0x7C, 0x3A, 0xED))
+
+      print("Purple icons generated")
+      PYEOF
+
+  - name: Generate Gradle Wrapper
+    run: |
+      gradle wrapper --gradle-version 8.10.2
+
+  - name: Build Debug APK
+    run: |
+      chmod +x gradlew
+      ./gradlew assembleDebug --stacktrace --no-daemon
+
+  - name: Upload APK
+    uses: actions/upload-artifact@v4
+    with:
+      name: Surf-Fountain-APK
+      path: app/build/outputs/apk/debug/*.apk
+
