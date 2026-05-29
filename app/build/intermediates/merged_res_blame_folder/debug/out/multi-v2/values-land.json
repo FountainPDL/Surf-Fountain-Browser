@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.surffountain.browser.app-mergeDebugResources-29:/values-land/values-land.xml",
+            "outputFile": "com.surffountain2.app-mergeDebugResources-30:/values-land/values-land.xml",
             "map": [
                 {
                     "source": "/data/data/com.termux/files/home/.gradle/caches/transforms-4/60cd596aafa3b3e4afd0c6b6ffb24cd5/transformed/appcompat-1.6.1/res/values-land/values-land.xml",

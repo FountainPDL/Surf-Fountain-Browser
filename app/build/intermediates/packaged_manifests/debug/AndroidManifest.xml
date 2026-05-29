@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.surffountain.browser"
+    package="com.surffountain2"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,14 +9,12 @@
         android:targetSdkVersion="34" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <permission
-        android:name="com.surffountain.browser.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.surffountain2.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.surffountain.browser.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.surffountain2.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:allowBackup="true"
@@ -25,10 +23,12 @@
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Surf Fountain"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
         android:theme="@style/Theme.SurfFountain" >
         <activity
-            android:name="com.surffountain.browser.MainActivity"
-            android:configChanges="orientation|screenSize"
+            android:name="com.surffountain2.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.surffountain.browser.androidx-startup"
+            android:authorities="com.surffountain2.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"

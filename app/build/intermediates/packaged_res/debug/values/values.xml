@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="green">#00C853</color>
-    <color name="purple_500">#8E24AA</color>
     <color name="purple_700">#6200EE</color>
-    <color name="red">#F50057</color>
     <style name="Theme.SurfFountain" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/purple_700</item>
+        <item name="colorPrimary">#6200EE</item>
+        <item name="colorPrimaryVariant">#3700B3</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="android:statusBarColor">#6200EE</item>
     </style>
 </resources>

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.surffountain.browser.app-mergeDebugResources-29:/values-small-v4/values-small-v4.xml",
+            "outputFile": "com.surffountain2.app-mergeDebugResources-30:/values-small-v4/values-small-v4.xml",
             "map": [
                 {
                     "source": "/data/data/com.termux/files/home/.gradle/caches/transforms-4/1a3d76d3f7504fd8e3837d8552c16362/transformed/material-1.11.0/res/values-small-v4/values-small-v4.xml",

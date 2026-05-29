@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.surffountain.browser.app-mergeDebugResources-29:/values-v16/values-v16.xml",
+            "outputFile": "com.surffountain2.app-mergeDebugResources-30:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/data/data/com.termux/files/home/.gradle/caches/transforms-4/17a78fa759c00c65b7144d7898c3a958/transformed/core-1.12.0/res/values-v16/values-v16.xml",
+                    "source": "/data/data/com.termux/files/home/.gradle/caches/transforms-4/8b7d7c6033c0ad55d1cbada688971ac0/transformed/core-1.9.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
