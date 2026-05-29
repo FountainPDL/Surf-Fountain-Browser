@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="#121212">
 
-    <!-- Top Address Bar (Brave Style) -->
+    <!-- Top Address Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:layout_height="match_parent"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Bottom Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,29 +48,29 @@
         android:gravity="center"
         android:padding="8dp">
 
-        <Button 
-            android:text="🛡️" 
+        <Button
+            android:text="🛡️"
             android:onClick="toggleShields"
             android:backgroundTint="#00C853"
             android:layout_weight="1"
             android:layout_height="48dp"/>
 
-        <Button 
-            android:text="🤖" 
+        <Button
+            android:text="🤖"
             android:onClick="openPDLAI"
             android:backgroundTint="#8E24AA"
             android:layout_weight="1"
             android:layout_height="48dp"/>
 
-        <Button 
-            android:text="⭐" 
+        <Button
+            android:text="⭐"
             android:onClick="addBookmark"
             android:backgroundTint="#F50057"
             android:layout_weight="1"
             android:layout_height="48dp"/>
 
-        <Button 
-            android:text="⋮" 
+        <Button
+            android:text="⋮"
             android:backgroundTint="#00C853"
             android:layout_weight="1"
             android:layout_height="48dp"/>
