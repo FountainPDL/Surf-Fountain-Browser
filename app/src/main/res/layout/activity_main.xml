@@ -4,12 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- Top Address Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#6200EE"
         android:padding="8dp"
         android:gravity="center_vertical">
+
         <EditText
             android:id="@+id/addressBar"
             android:layout_width="0dp"
@@ -17,34 +19,54 @@
             android:layout_weight="1"
             android:hint="Search or enter URL"
             android:textColor="#FFFFFF"
+            android:textColorHint="#B0FFFFFF"
             android:background="@android:color/transparent"
             android:padding="12dp"/>
     </LinearLayout>
 
+    <!-- WebView Area -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- Brave-style Bottom Bar -->
+    <!-- Bottom Bar (Brave Style) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#6200EE"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="6dp">
+        android:padding="8dp">
 
-        <Button android:text="🛡️" android:onClick="toggleShields" android:backgroundTint="#00C853" android:layout_weight="1"/>
-        <Button android:text="🤖" android:onClick="openPDLAI" android:backgroundTint="#8E24AA" android:layout_weight="1"/>
-        <Button android:text="⭐" android:onClick="addBookmark" android:backgroundTint="#F50057" android:layout_weight="1"/>
-        <Button android:text="Tabs" android:backgroundTint="#00C853" android:layout_weight="1"/>
-        <Button android:text="⋮" android:backgroundTint="#00C853" android:layout_weight="1"/>
+        <Button 
+            android:text="🛡️ Shields" 
+            android:onClick="toggleShields" 
+            android:backgroundTint="#00C853"
+            android:layout_weight="1"/>
+
+        <Button 
+            android:text="🤖 PDL AI" 
+            android:onClick="openPDLAI" 
+            android:backgroundTint="#8E24AA"
+            android:layout_weight="1"/>
+
+        <Button 
+            android:text="⭐ Bookmark" 
+            android:onClick="addBookmark" 
+            android:backgroundTint="#F50057"
+            android:layout_weight="1"/>
+
+        <Button 
+            android:text="⋮ Menu" 
+            android:backgroundTint="#00C853"
+            android:layout_weight="1"/>
     </LinearLayout>
 </LinearLayout>
