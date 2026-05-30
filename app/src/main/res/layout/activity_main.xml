@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="#0F0F0F">
 
-    <!-- Top Address Bar (Brave Style) -->
+    <!-- Brave-style Top Address Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:hint="Search or enter URL"
             android:textColor="#FFFFFF"
             android:textColorHint="#888888"
-            android:background="@drawable/address_bar_background"
+            android:background="#2A2A3A"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:singleLine="true"
@@ -41,7 +41,7 @@
             android:layout_height="match_parent"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- Bottom Brave-style Navigation -->
+    <!-- Bottom Navigation (Brave Style) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
