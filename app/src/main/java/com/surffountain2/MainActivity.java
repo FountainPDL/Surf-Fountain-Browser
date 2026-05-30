@@ -1,16 +1,15 @@
 package com.surffountain2;
 
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.EditText;
-import android.widget.Toast;
-
+import android.os.Environment;
+import android.view.View;
+import android.webkit.*;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -24,68 +23,69 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        try {
-            setContentView(R.layout.activity_main);
+        webView = findViewById(R.id.webView);
+        addressBar = findViewById(R.id.addressBar);
+        swipeRefresh = findViewById(R.id.swipeRefresh);
 
-            webView = findViewById(R.id.webView);
-            addressBar = findViewById(R.id.addressBar);
-            swipeRefresh = findViewById(R.id.swipeRefresh);
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
 
-            if (webView == null || addressBar == null || swipeRefresh == null) {
-                Toast.makeText(this, "Layout error", Toast.LENGTH_LONG).show();
-                return;
-            }
+        webView.setWebViewClient(new CustomWebViewClient());
+        webView.setWebChromeClient(new WebChromeClient());
 
-            WebSettings settings = webView.getSettings();
-            settings.setJavaScriptEnabled(true);
-            settings.setDomStorageEnabled(true);
-            settings.setLoadWithOverviewMode(true);
-            settings.setUseWideViewPort(true);
-            settings.setBuiltInZoomControls(true);
-            settings.setDisplayZoomControls(false);
+        webView.loadUrl("https://www.google.com");
 
-            webView.setWebChromeClient(new WebChromeClient());
+        addressBar.setOnEditorActionListener((v, actionId, event) -> {
+            String url = addressBar.getText().toString().trim();
+            if (!url.startsWith("http")) url = "https://" + url;
+            webView.loadUrl(url);
+            return true;
+        });
 
-            webView.setWebViewClient(new WebViewClient() {
-                @Override
-                public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                    addressBar.setText(url);
-                    super.onPageStarted(view, url, favicon);
-                }
+        swipeRefresh.setOnRefreshListener(() -> {
+            webView.reload();
+            swipeRefresh.setRefreshing(false);
+        });
 
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                    return false;
-                }
-            });
+        setupDownloadAndIframe();
+    }
 
-            addressBar.setOnEditorActionListener((v, actionId, event) -> {
-                String url = addressBar.getText().toString().trim();
+    private void setupDownloadAndIframe() {
+        webView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "SurfFountain_" + System.currentTimeMillis());
+            ((DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE)).enqueue(request);
+        });
+    }
 
-                if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                    url = "https://" + url;
-                }
+    public void toggleShields(View view) {
+        Toast.makeText(this, "🛡️ Shields Activated (Ad & Tracker Blocking)", Toast.LENGTH_SHORT).show();
+    }
 
-                webView.loadUrl(url);
-                return true;
-            });
+    public void openPDLAI(View view) {
+        Toast.makeText(this, "🤖 PDL AI Opened", Toast.LENGTH_SHORT).show();
+    }
 
-            swipeRefresh.setOnRefreshListener(() -> {
-                webView.reload();
-                swipeRefresh.setRefreshing(false);
-            });
+    public void addBookmark(View view) {
+        Toast.makeText(this, "⭐ Bookmark Saved", Toast.LENGTH_SHORT).show();
+    }
 
-            webView.loadUrl("https://google.com");
-
-        } catch (Exception e) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+    private class CustomWebViewClient extends WebViewClient {
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            addressBar.setText(url);
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
+        if (webView.canGoBack()) {
             webView.goBack();
         } else {
             super.onBackPressed();

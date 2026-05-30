@@ -2,17 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#121212">
 
-    <!-- Address Bar -->
-    <EditText
-        android:id="@+id/addressBar"
+    <!-- Top Purple Address Bar -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search or enter URL"
         android:background="#6200EE"
-        android:textColor="#FFFFFF"
-        android:padding="12dp" />
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/addressBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Search or enter URL"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            android:background="@android:color/transparent"
+            android:padding="12dp"/>
+    </LinearLayout>
 
     <!-- WebView -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -24,36 +35,39 @@
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- Bottom Bar -->
+    <!-- Brave-style Bottom Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#6200EE"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="6dp">
 
         <Button
-            android:text="Shields"
+            android:text="🛡️ SHIELDS"
             android:onClick="toggleShields"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="52dp"
+            android:textColor="#FFFFFF"/>
 
         <Button
-            android:text="PDL AI"
+            android:text="🤖 PDL AI"
             android:onClick="openPDLAI"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="52dp"
+            android:textColor="#FFFFFF"/>
 
         <Button
-            android:text="Bookmark"
+            android:text="⭐ BOOKMARK"
             android:onClick="addBookmark"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="52dp"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
 </LinearLayout>
